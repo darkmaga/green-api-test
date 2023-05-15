@@ -1,15 +1,19 @@
 import { PlusIcon, UserIcon } from '@heroicons/react/24/solid'
+import clsx from 'clsx'
 import { useState } from 'react'
 import { TConversation } from '../core/ContextTypes'
 import useConversationContext from '../hooks/useUserContext'
 import NewPersonDialog from './dialogs/NewPersonDialog'
 
 const DialogPerson = ({ from, lastMessage, lastMessageDate }: TConversation) => {
-  const { updateCurrentUser } = useConversationContext()
+  const { updateCurrentUser, conversation } = useConversationContext()
 
   return (
     <button
-      className="p-4 w-full grid grid-cols-[auto,1fr,auto] gap-3 items-center cursor-pointer hover:bg-secondary-light"
+      className={clsx(
+        'p-4 w-full grid grid-cols-[auto,1fr,auto] gap-3 items-center cursor-pointer hover:bg-secondary-light',
+        conversation.currentUser === from && 'bg-secondary-light'
+      )}
       onClick={() => updateCurrentUser(from)}
     >
       <span className="w-10 bg-gray-400 rounded-full">
