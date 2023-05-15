@@ -34,7 +34,10 @@ const ProfileSettingsDialog = ({ setIsUserExist }: Props) => {
 
   const closeModal = () => {
     try {
-      schema.parse(getValues())
+      const data = schema.parse(getValues())
+      sessionStorage.setItem('idInstance', data.idInstance)
+      sessionStorage.setItem('apiTokenInstance', data.apiTokenInstance)
+
       setIsOpen(false)
     } catch (error) {
       if (!(error instanceof z.ZodError)) return
